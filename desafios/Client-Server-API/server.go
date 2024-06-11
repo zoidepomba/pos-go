@@ -53,7 +53,8 @@ type StructCotacao struct {
 
 func main() {
 	http.HandleFunc("/cotacao", handleCotacao)
-	http.ListenAndServe(":8080", nil)
+	log.Printf("Servidor rodando na porta :8080\n")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func handleCotacao(w http.ResponseWriter, r *http.Request) {
