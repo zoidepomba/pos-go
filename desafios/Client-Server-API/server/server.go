@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 	"time"
-	_ "github.com/mattn/go-sqlite3"
 
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type StructCotacao struct {
@@ -21,13 +21,13 @@ func main() {
 
 	criaTabela()
 
-
 	http.HandleFunc("/cotacao", handleCotacao)
 	log.Printf("Servidor rodando na porta :8080\n")
+	log.Printf("Servidor rodando no path /cotacao ")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func criaTabela(){
+func criaTabela() {
 	log.Printf("Criando a tabela no banco de dados")
 	db, err := sql.Open("sqlite3", "./cotacoes.db")
 	if err != nil {
@@ -104,7 +104,7 @@ func handleCotacao(w http.ResponseWriter, r *http.Request) {
 
 	defer db.Close()
 
-	ctxDB, cancelDB := context.WithTimeout(context.Background(), 10 * time.Millisecond)
+	ctxDB, cancelDB := context.WithTimeout(context.Background(), 10*time.Millisecond)
 	defer cancelDB()
 
 	if err := saveCotacaoDB(ctxDB, db, req); err != nil {
