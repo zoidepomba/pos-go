@@ -8,5 +8,5 @@ import (
 
 func main() {
 	m := math.Match{A: 1, B: 2}
-	fmt.Println(m.add())
+	fmt.Println(m.Add())
 }

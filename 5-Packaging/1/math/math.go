@@ -5,6 +5,6 @@ type Match struct{
 	B int
 }
 
-func (m Match) add() int{
+func (m Match) Add() int{
 	return m.A + m.B
 }
