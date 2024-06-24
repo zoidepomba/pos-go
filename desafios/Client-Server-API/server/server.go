@@ -31,7 +31,7 @@ func criaTabela() {
 	log.Printf("Criando a tabela no banco de dados")
 	db, err := sql.Open("sqlite3", "./cotacoes.db")
 	if err != nil {
-		log.Fatal("Erro ao abrir o banco de dados: %v", err)
+		log.Printf("Erro ao abrir o banco de dados: %v", err)
 		panic(err)
 	}
 	defer db.Close()
@@ -109,7 +109,7 @@ func handleCotacao(w http.ResponseWriter, r *http.Request) {
 
 	if err := saveCotacaoDB(ctxDB, db, req); err != nil {
 		http.Error(w, "Erro ao salvar cotação", http.StatusInternalServerError)
-		log.Println("Erro ao salvar cotação: %v", err)
+		log.Printf("Erro ao salvar cotação: %v", err)
 		return
 	}
 
