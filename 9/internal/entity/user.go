@@ -1,9 +1,8 @@
 package entity
 
 import (
-	"github.com/zoidepomba/pos-go/tree/main/9/internal/entity"
 	"github.com/zoidepomba/pos-go/tree/main/9/pkg/entity"
-	"golang.org/x/crypto/bycrypt"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -13,8 +12,8 @@ type User struct {
 	Password string `json:"-"`
 }
 
-func NewUser(name, email, password string) *User {
-	hash, err := bycrypt.GenerateFromPassword([]byte(password), bycrypt.DefaultCost)
+func NewUser(name, email, password string) (*User, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
 	}
@@ -27,6 +26,6 @@ func NewUser(name, email, password string) *User {
 }
 
 func (u *User) ValidatePassword(password string) bool {
-	err := bycrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
+	err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
 	return err == nil
 }

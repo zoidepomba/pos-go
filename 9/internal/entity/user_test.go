@@ -3,7 +3,7 @@ package entity
 import (
 	"testing"
 
-	"github.com/stretch/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewUser(t *testing.T) {
